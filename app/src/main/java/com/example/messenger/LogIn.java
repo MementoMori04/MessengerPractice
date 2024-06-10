@@ -28,6 +28,7 @@ public class LogIn extends AppCompatActivity {
     EditText Password;
 
     private FirebaseAuth mAuth;
+
 //    @Override
 //    public void onStart() {
 //        super.onStart();

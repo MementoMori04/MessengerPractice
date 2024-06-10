@@ -12,4 +12,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         massage = itemView.findViewById(R.id.message_item);
     }
+
 }
+
