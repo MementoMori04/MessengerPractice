@@ -15,10 +15,17 @@
         android:layout_height="wrap_content">
 
 
+        <Button
+            android:id="@+id/logoutbutton"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:background="#6750a4"
+            app:icon="@android:drawable/ic_delete"
+            app:iconGravity="textEnd" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="44dp"
             android:background="#FFFFFF"
             android:clickable="false"
             android:text="@string/app_name"

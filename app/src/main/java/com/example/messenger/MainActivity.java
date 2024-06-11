@@ -1,14 +1,11 @@
 package com.example.messenger;
 
 
-
 import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,25 +40,36 @@ public class MainActivity extends AppCompatActivity {
     EditText editTextmes;
     Button sendbutt;
     RecyclerView recyclerView;
-
-    //   Button logout;
+    FirebaseAuth auth;
+    Button logout;
     ArrayList<String> messeges = new ArrayList<>();
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        setContentView(R.layout.item_massage);
         recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DataAdapter dataAdapter = new DataAdapter(this, messeges);
         recyclerView.setAdapter(dataAdapter);
-//        name = findViewById(R.id.imya);
         editTextmes = findViewById(R.id.txt);
         sendbutt = findViewById(R.id.send);
+        logout = findViewById(R.id.logoutbutton);
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        if(user == null){
+            Intent intent = new Intent(getApplicationContext(), SignUp.class);
+            startActivity(intent);
+            finish();
+        }
+        logout.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(getApplicationContext(), SignUp.class);
+            startActivity(intent);
+            finish();
+        });
 
-
-//        logout.findViewById(R.id.logoutbutton);
         sendbutt.setOnClickListener(v -> {
             String mes = editTextmes.getText().toString();
             if (mes.isEmpty()) {
