@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("messages");
-
+    String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid(); // Получаем UID текущего пользователя
 
     EditText editTextmes;
     Button sendbutt;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid(); // Получаем UID текущего пользователя
+
 
             // Создаем объект, содержащий сообщение и UID
             Map<String, Object> messageMap = new HashMap<>();
